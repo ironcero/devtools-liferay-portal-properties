@@ -49,9 +49,9 @@ In details:
 * Repositories: you will need mavenLocal repository because you've moved plugin jar file to your maven local repository.
 * Apply plugin: DevTools Liferay Portal Properties plugin id is _devtools-liferay-portal-properties_.
 * BuildProperties: In this section we will put all configuration parameters. In 1.0.0 release we have:
-** _descFolderPath_: Path where properties file will be copied and properties will be replaced.
-** _originFolderPath_: Location of original properties file (with ${} filter params).
-** _keysFolderPath_: Location of filter properties file.
+  * _descFolderPath_: Path where properties file will be copied and properties will be replaced.
+  * _originFolderPath_: Location of original properties file (with ${} filter params).
+  * _keysFolderPath_: Location of filter properties file.
 * build.finaluzedBy: With this command we can execute plugin on build stage and not only on buildproperties.
 
 It's time to add your properties files. 
@@ -109,3 +109,4 @@ Total time: 0.275 secs
 ```
 
 You will see _WARNING_ log when you have some properties on your original properties files and you haven't filter for these properties on your filter properties files.
+You could review Liferay Test project in https://github.com/ironcero/devtools-liferay-portal-properties/tree/master/testProject/liferay-workspace
