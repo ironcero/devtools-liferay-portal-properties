@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'devtools.liferay'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+apply plugin: 'java-gradle-plugin'
+
+gradlePlugin {
+    plugins {
+        liferayPortalProperties{
+            id = 'devtools-liferay-portal-properties'
+            implementationClass = 'devtools.liferay.portal.properties.plugin.PortalPropertiesPlugin'
+        }
+    }
+}
+
+apply plugin: 'maven'
