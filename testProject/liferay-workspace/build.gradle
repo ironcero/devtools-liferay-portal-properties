@@ -1,0 +1,22 @@
+buildscript {
+    dependencies {
+        classpath group: "devtools.liferay", name: "portal-properties", version: "1.0.0"
+    }
+
+    repositories {
+		mavenLocal()
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
+apply plugin: "devtools-liferay-portal-properties"
+
+buildproperties {
+    descFolderPath = 'configs'
+    originFolderPath = 'configs/common/origin'
+    keysFolderPath = 'configs/common/keys'
+}
+
+build.finalizedBy(buildproperties)
