@@ -2,7 +2,7 @@
 Gradle Plugin for Portal.properties on Liferay 7.0+ liferay workspace
 
 ## Summary
-This gradle plugin let you manage your properties file on your liferay workspace (version 7.0 and 7.1).
+This gradle plugin let you manage your properties files on your liferay workspace (version 7.0 and 7.1).
 
 Blade tool initializes this kind of workpace with one folder named _configs_. There are some folder into _configs_ folder:
 * _common_
@@ -14,11 +14,12 @@ Blade tool initializes this kind of workpace with one folder named _configs_. Th
 It's very common that you need to keep different values for the same properties depends on your environment. This plugin try to help you to manage this settup: copying all properties files from one common folder to each environment folder and replacing all properties found in filters file to the correct value.
 
 ## How to use
-First you will need the plugin jar file. You could download latest version from https://github.com/ironcero/devtools-liferay-portal-properties/blob/master/release/portal-properties-1.0.0.jar (Maven Central Version coming soon) or download source code from this github and compile it.
+First you will need the plugin jar file. You could download latest version from https://github.com/ironcero/devtools-liferay-portal-properties/blob/master/release/portal-properties-1.0.0.jar (Maven Central Version coming soon) or download source code from this github and to compile it.
 If you download jar file you will need move this to correct path in your local repository (gradle coordenates are _devtools.liferay:portal-properties:1.0.0_). Else if you download source code and compile it you will need to execute _install_ maven task to install jar file on correct path in your local repository.
 
-After jar file is fetched you will need to set up your liferay workspace. You will need to create two news folder. You can create these folder in path you want but we recommend created into _common_ folder (in _configs_ folder).
-Now you will need to set up this plugins in your build.gradle file. You will need add these line to build.gradle file:
+After jar file is fetched you will need to set up your liferay workspace. You will need to create two newely folder. You can create these folder in path you want but we recommend created into _common_ folder (in _configs_ folder).
+
+Now you will need to set up this plugin in your build.gradle file. You will need add these line to build.gradle file:
 ```gradle
 buildscript {
     dependencies {
@@ -52,7 +53,7 @@ In details:
   * _descFolderPath_: Path where properties file will be copied and properties will be replaced.
   * _originFolderPath_: Location of original properties file (with ${} filter params).
   * _keysFolderPath_: Location of filter properties file.
-* build.finaluzedBy: With this command we can execute plugin on build stage and not only on buildproperties.
+* build.finaluzedBy: With this command we can execute this plugin on _build_ stage and not only on _buildproperties_.
 
 It's time to add your properties files. 
 
