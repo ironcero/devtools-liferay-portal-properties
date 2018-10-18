@@ -4,3 +4,4 @@
 /build
 testProject/liferay-workspace/gradle/wrapper/gradle-wrapper.properties
 testProject/liferay-workspace/gradle/wrapper/gradle-wrapper.jar
+*.class

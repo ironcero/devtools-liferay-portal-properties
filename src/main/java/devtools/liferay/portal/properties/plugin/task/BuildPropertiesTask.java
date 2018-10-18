@@ -14,6 +14,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import devtools.liferay.portal.properties.plugin.PortalPropertiesUtils;
 
 public class BuildPropertiesTask extends DefaultTask {
     private String descFolderPath = "";
@@ -23,14 +24,14 @@ public class BuildPropertiesTask extends DefaultTask {
 
     @TaskAction
     public void buildPropertiesTask() throws Exception{
-        log("Build properties task..." + descFolderPath);
+        PortalPropertiesUtils.log("Build properties task..." + descFolderPath);
         printSettings();
         List<Path> originFiles = getFilesFromFolder(originFolderPath);
         List<Path> keysFiles = getFilesFromFolder(keysFolderPath);
         List<Path> destinationFolders = getFolderFromFolder(descFolderPath);
 
         keysFiles.stream().forEach(keysFile -> {
-            parseEnvironment(getFileName(keysFile.getFileName().toString()), keysFile, originFiles, destinationFolders);
+            parseEnvironment(PortalPropertiesUtils.getFileName(keysFile.getFileName().toString()), keysFile, originFiles, destinationFolders);
         });
     }
 
@@ -45,7 +46,7 @@ public class BuildPropertiesTask extends DefaultTask {
     }
 
     private void parseEnvironment(String environment, Path keysFilePath, List<Path> originFiles, List<Path> destinationFolders){
-        log("Parsing " + environment + " environment...");
+        PortalPropertiesUtils.log("Parsing " + environment + " environment...");
         originFiles.stream().forEach(originFile -> {
             destinationFolders.stream().filter(destinationFolder -> {
                 return destinationFolder.toString().endsWith(environment);
@@ -75,12 +76,12 @@ public class BuildPropertiesTask extends DefaultTask {
                     Files.write(destinationFilePath, content.getBytes(StandardCharsets.UTF_8));
                 }
 
-                checkBrokenProperties(destinationFilePath, getFileName(keysFilePath.getFileName().toString()));
+                checkBrokenProperties(destinationFilePath, PortalPropertiesUtils.getFileName(keysFilePath.getFileName().toString()));
 
 
 
             }catch(IOException exception){
-                error(null, exception);
+                PortalPropertiesUtils.error(null, exception);
             }
         }
     }
@@ -90,82 +91,79 @@ public class BuildPropertiesTask extends DefaultTask {
         Pattern brokenPropertyPattern = Pattern.compile("\\$\\{.*\\}");
         Matcher brokenPropertyMatcher = brokenPropertyPattern.matcher(content);
         while(brokenPropertyMatcher.find()){
-            error("WARNING: Property not found in file " + destinationFilePath.getFileName().toString() + " on " + environment + " folder (" + brokenPropertyMatcher.group() + ")", null);
+            PortalPropertiesUtils.error("WARNING: Property not found in file " + destinationFilePath.getFileName().toString() + " on " + environment + " folder (" + brokenPropertyMatcher.group() + ")", null);
         }
     }
 
 
     private Path copyFile(Path originFilePath, Path destinationFolderPath){
-        log("Copying " + originFilePath.toString() + " to " + destinationFolderPath.toString());
+        PortalPropertiesUtils.log("Copying " + originFilePath.toString() + " to " + destinationFolderPath.toString());
         Path destinationFilePath = Paths.get(destinationFolderPath.toString() + "/" + originFilePath.getFileName().toString());
         try {
             Files.copy(originFilePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
             return destinationFilePath;
         }catch(IOException exception){
-            error(null, exception);
+            PortalPropertiesUtils.error(null, exception);
             return null;
         }
     }
 
-    private String getFileExtension(String file) {
-        if (file == null) {
-            return "";
-        }
-        int i = file.lastIndexOf('.');
-        String ext = i > 0 ? file.substring(i + 1) : "";
-        return ext;
-    }
-
-    private String getFileName(String file) {
-        if (file == null) {
-            return "";
-        }
-        int i = file.lastIndexOf('.');
-        String ext = i > 0 ? file.substring(0, i) : "";
-        return ext;
-    }
-
     private void printSettings(){
-        log("Settings: ");
-        log("destination folder path: " + descFolderPath);
-        log("origin folder path: " + originFolderPath);
-        log("keys folder path: " + keysFolderPath);
+        PortalPropertiesUtils.log("Settings: ");
+        PortalPropertiesUtils.log("destination folder path: " + descFolderPath);
+        PortalPropertiesUtils.log("origin folder path: " + originFolderPath);
+        PortalPropertiesUtils.log("keys folder path: " + keysFolderPath);
     }
 
+    /**
+     * This method return descFolderPath value
+     * @return descFolderPath value
+     */
     public String getDescFolderPath() {
         return descFolderPath;
     }
 
+    /**
+     * This method set desFolderPath value
+     * @param descFolderPath desFolderPath value
+     */
     public void setDescFolderPath(String descFolderPath) {
         this.descFolderPath = descFolderPath;
     }
 
+    /**
+     * This method return originFolderPath value
+     * @return originFolderPath value
+     */
     public String getOriginFolderPath() {
         return originFolderPath;
     }
 
+    /**
+     * This method set originFolderPath value
+     * @param originFolderPath originFolderPath value
+     */
     public void setOriginFolderPath(String originFolderPath) {
         this.originFolderPath = originFolderPath;
     }
 
+    /**
+     * This method return keysFolderPath value
+     * @return keysFolderPath value
+     */
     public String getKeysFolderPath() {
         return keysFolderPath;
     }
 
+    /**
+     * This method set keysFolderPath value
+     * @param keysFolderPath keysFolderPath value
+     */
     public void setKeysFolderPath(String keysFolderPath) {
         this.keysFolderPath = keysFolderPath;
     }
 
-    private void log(String message){
-        System.out.println(message);
-    }
 
-    private void error(String message, Exception exception){
-        if(message != null && !message.isEmpty()) {
-            System.err.println(message);
-        }
-        if(exception != null) {
-            exception.printStackTrace();
-        }
-    }
+
+
 }

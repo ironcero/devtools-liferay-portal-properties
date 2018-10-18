@@ -16,6 +16,9 @@ dependencies {
 }
 
 apply plugin: 'java-gradle-plugin'
+apply plugin: 'maven'
+apply plugin: 'jacoco'
+
 
 gradlePlugin {
     plugins {
@@ -26,4 +29,14 @@ gradlePlugin {
     }
 }
 
-apply plugin: 'maven'
+jacoco {
+    toolVersion = "0.8.1"
+    reportsDir = file("$buildDir/reports/customJacocoReportDir")
+}
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
