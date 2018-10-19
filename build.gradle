@@ -41,6 +41,3 @@ jacocoTestReport {
         html.destination file("${buildDir}/jacocoHtml")
     }
 }
-
-sourceSets.test.resources.srcDirs = [ "src/test/resources/" ]
-sourceSets.test.resources.includes = [ "**/empty/*.gradle" ]

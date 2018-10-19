@@ -7,7 +7,7 @@ import org.junit.Test;
 public class BuildPropertiesTaskTest {
 
     /**
-     * getFileExtension: null -> ""
+     * getFileExtension: notFolders -> ""
      */
     @Test
     public void getFileExtensionNullTest(){
@@ -18,7 +18,7 @@ public class BuildPropertiesTaskTest {
     }
 
     /**
-     * getFileExtension: null -> ""
+     * getFileExtension: notFolders -> ""
      */
     @Test
     public void getFileExtensionBlankTest(){
