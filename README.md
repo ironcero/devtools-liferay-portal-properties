@@ -119,5 +119,5 @@ Base release
 * Add correct configuration default values
 ### 1.1.0
 * Junit and coverage included
-### 1.1.0
+### 1.1.1
 * Integration test included
