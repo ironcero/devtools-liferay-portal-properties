@@ -12,6 +12,9 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
 
+import static devtools.liferay.portal.properties.plugin.test.PortalPropertiesPluginTestKeys.BUILD_COMMAND;
+import static devtools.liferay.portal.properties.plugin.test.PortalPropertiesPluginTestKeys.GRADLE_BUILD_FILE_NAME;
+
 public class PortalPropertiesPluginNullTest {
 
     @Rule
@@ -20,15 +23,13 @@ public class PortalPropertiesPluginNullTest {
 
     @Before
     public void setUp() throws IOException{
-        testProjectDir.delete();
-        testProjectDir.create();
-        buildFile = testProjectDir.newFile("build.gradle");
+        buildFile = testProjectDir.newFile(GRADLE_BUILD_FILE_NAME);
     }
 
     @Test(expected = UnexpectedBuildFailure.class)
     public void testBuildPropertiesNull() throws Exception {
         InputStream inputStream = new StringInputStream(PortalPropertiesPluginTestKeys.BASE_BUILD_GRADLE_FILE_CONTENT);
         FileUtils.copyInputStreamToFile(inputStream, buildFile);
-        GradleRunner.create().withProjectDir(testProjectDir.getRoot()).withArguments("buildproperties").build();
+        GradleRunner.create().withProjectDir(testProjectDir.getRoot()).withArguments(BUILD_COMMAND).build();
     }
 }

@@ -26,23 +26,28 @@ public class PortalPropertiesPluginEmptyTest {
     @Rule
     public final TemporaryFolder testProjectDir = new TemporaryFolder();
     private File buildFile;
+    private BuildResult result;
 
     @Before
     public void setUp() throws IOException{
-        testProjectDir.delete();
-        testProjectDir.create();
-        buildFile = testProjectDir.newFile("build.gradle");
-    }
-
-    @Test
-    public void testBuildPropertiesEmpty() throws Exception {
+        buildFile = testProjectDir.newFile(GRADLE_BUILD_FILE_NAME);
         InputStream inputStream = new StringInputStream(PortalPropertiesPluginTestKeys.BASE_BUILD_GRADLE_FILE_CONTENT);
         FileUtils.copyInputStreamToFile(inputStream, buildFile);
         createEmptyFolders(testProjectDir);
-        BuildResult result = GradleRunner.create().withProjectDir(testProjectDir.getRoot()).withArguments("buildproperties").build();
-        //assertTrue(result.getOutput().contains(""));
-        assertEquals(SUCCESS, result.task(":buildproperties").getOutcome());
+        result = GradleRunner.create().withProjectDir(testProjectDir.getRoot()).withArguments(BUILD_COMMAND).build();
+    }
+
+    @Test
+    public void testSuccess() {
+        assertEquals(SUCCESS, result.task(":" + BUILD_COMMAND).getOutcome());
+    }
+    @Test
+    public void testCorrectDestinationStructure() {
         assertEquals(true, checkEmptyFolders(testProjectDir));
+    }
+    @Test
+    public void testWarningMessages() {
+        assertEquals(false, result.getOutput().contains("WARNING"));
     }
 
     private void createEmptyFolders(TemporaryFolder temporaryFolder) throws IOException{
