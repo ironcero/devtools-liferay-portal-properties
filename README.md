@@ -111,3 +111,13 @@ Total time: 0.275 secs
 
 You will see _WARNING_ log when you have some properties on your original properties files and you haven't filter for these properties on your filter properties files.
 You could review Liferay Test project in https://github.com/ironcero/devtools-liferay-portal-properties/tree/master/testProject/liferay-workspace
+
+## Releases
+### 1.0.0
+Base release
+### 1.0.1
+* Add correct configuration default values
+### 1.1.0
+* Junit and coverage included
+### 1.1.0
+* Integration test included
