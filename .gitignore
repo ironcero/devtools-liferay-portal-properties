@@ -5,3 +5,13 @@
 testProject/liferay-workspace/gradle/wrapper/gradle-wrapper.properties
 testProject/liferay-workspace/gradle/wrapper/gradle-wrapper.jar
 *.class
+
+\.classpath
+
+\.project
+
+\.settings/org\.eclipse\.buildship\.core\.prefs
+
+\.settings/org\.eclipse\.jdt\.core\.prefs
+
+\.settings/org\.eclipse\.wst\.common\.project\.facet\.core\.xml

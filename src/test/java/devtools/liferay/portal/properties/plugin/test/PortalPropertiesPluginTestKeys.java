@@ -14,7 +14,7 @@ public class PortalPropertiesPluginTestKeys {
             "        }\n" +
             "    }\n" +
             "    dependencies {\n" +
-            "        classpath group: 'devtools.liferay', name: 'portal-properties', version: '1.1.0'\n" +
+            "        classpath group: 'devtools.liferay', name: 'portal-properties', version: '1.1.1'\n" +
             "    }\n" +
             " }\n" +
             " apply plugin: 'devtools-liferay-portal-properties'\n" +
