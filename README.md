@@ -14,8 +14,8 @@ Blade tool initializes this kind of workpace with one folder named _configs_. Th
 It's very common that you need to keep different values for the same properties depends on your environment. This plugin try to help you to manage this settup: copying all properties files from one common folder to each environment folder and replacing all properties found in filters file to the correct value.
 
 ## How to use
-First you will need the plugin jar file. You could download latest version from https://github.com/ironcero/devtools-liferay-portal-properties/blob/master/release/portal-properties-1.0.0.jar (Maven Central Version coming soon) or download source code from this github and to compile it.
-If you download jar file you will need move this to correct path in your local repository (gradle coordenates are _devtools.liferay:portal-properties:1.0.0_). Else if you download source code and compile it you will need to execute _install_ maven task to install jar file on correct path in your local repository.
+First you will need the plugin jar file. You could download latest version from https://repo1.maven.org/maven2/com/github/ironcero/portal-properties (or search on Maven Central) or download source code from this github and to compile it.
+If you download jar file you will need move this to correct path in your local repository (gradle coordenates are _com.github.ironcero:portal-properties:2.0.0_). Else if you download source code and compile it you will need to execute _install_ maven task to install jar file on correct path in your local repository.
 
 After jar file is fetched you will need to set up your liferay workspace. You will need to create two newely folder. You can create these folder in path you want but we recommend created into _common_ folder (in _configs_ folder).
 
@@ -23,7 +23,7 @@ Now you will need to set up this plugin in your build.gradle file. You will need
 ```gradle
 buildscript {
     dependencies {
-        classpath group: "devtools.liferay", name: "portal-properties", version: "1.0.0"
+        classpath group: "com.github.ironcero", name: "portal-properties", version: "2.0.0"
     }
 
     repositories {
@@ -121,3 +121,5 @@ Base release
 * Junit and coverage included
 ### 1.1.1
 * Integration test included
+### 2.0.0
+* Release on Maven Central (through oss.sonatype.org)
