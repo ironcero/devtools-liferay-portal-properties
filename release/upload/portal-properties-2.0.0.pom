@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.ironcero</groupId>
+  <artifactId>portal-properties</artifactId>
+  <version>2.0.0</version>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <name>Portal-properties</name>
+  <description>This gradle plugin let you manage your properties files on your liferay workspace (version 7.0 and 7.1).</description>
+  <url>https://github.com/ironcero/devtools-liferay-portal-properties</url>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:https://github.com/ironcero/devtools-liferay-portal-properties.git</connection>
+    <developerConnection>scm:git:https://github.com/ironcero/devtools-liferay-portal-properties.git</developerConnection>
+    <tag>master</tag>
+    <url>https://github.com/ironcero/devtools-liferay-portal-properties</url>
+  </scm>
+  <developers>
+    <developer>
+      <id>ironcero</id>
+      <name>Ignacio Roncero Bazarra</name>
+      <email>ironcero@gmail.com</email>
+      <url>https://github.com/ironcero</url>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Madrid</timezone>
+      <properties>
+        <picUrl></picUrl>
+      </properties>
+    </developer>
+  </developers>
+</project>
