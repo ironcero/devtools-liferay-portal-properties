@@ -26,7 +26,7 @@ public class BuildPropertiesTask extends DefaultTask {
     public void buildPropertiesTask() throws Exception{
         PortalPropertiesUtils.log("Build properties task..." + descFolderPath);
         printSettings();
-        List<Path> originFiles = getFilesFromFolder(originFolderPath);
+        List<Path> originFiles = getAllFilesFromFolder(originFolderPath);
         List<Path> keysFiles = getFilesFromFolder(keysFolderPath);
         List<Path> destinationFolders = getFolderFromFolder(descFolderPath);
 
@@ -43,6 +43,24 @@ public class BuildPropertiesTask extends DefaultTask {
     private List<Path> getFolderFromFolder(String folderPath) throws IOException {
         final List<Path> collect = Files.list(Paths.get(getProject().getProjectDir() + "/" +  folderPath)).filter(Files::isDirectory).collect(Collectors.toList());
         return collect;
+    }
+    
+    private List<Path> getAllFilesFromFolder(String folderPath) throws IOException {
+    	String folder = "";
+    	if(folderPath.startsWith("/")) {
+    		folder = folderPath;
+    	}else {
+    		folder = getProject().getProjectDir() + "/" +  folderPath;
+    	}
+    	final List<Path> collect = Files.list(Paths.get(folder)).filter(Files::isRegularFile).collect(Collectors.toList());
+    	Files.list(Paths.get(folder)).filter(Files::isDirectory).forEach(path -> {
+    		try {
+    			collect.addAll(getAllFilesFromFolder(path.toString()));
+    		}catch(IOException exception) {
+    			PortalPropertiesUtils.error("",exception);
+    		}    		
+    	});
+    	return collect;
     }
 
     private void parseEnvironment(String environment, Path keysFilePath, List<Path> originFiles, List<Path> destinationFolders){
@@ -98,7 +116,11 @@ public class BuildPropertiesTask extends DefaultTask {
 
     private Path copyFile(Path originFilePath, Path destinationFolderPath){
         PortalPropertiesUtils.log("Copying " + originFilePath.toString() + " to " + destinationFolderPath.toString());
-        Path destinationFilePath = Paths.get(destinationFolderPath.toString() + "/" + originFilePath.getFileName().toString());
+        
+        long projectDirLength = getProject().getProjectDir().getAbsolutePath().length() + originFolderPath.length() + 1;
+        String originFileName = originFilePath.toString().substring(Integer.parseInt(String.valueOf(projectDirLength)), originFilePath.toString().length());
+        Path destinationFilePath = Paths.get(destinationFolderPath.toString() + "/" + originFileName);
+        createParentFolder(destinationFilePath.getParent());
         try {
             Files.copy(originFilePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
             return destinationFilePath;
@@ -106,6 +128,18 @@ public class BuildPropertiesTask extends DefaultTask {
             PortalPropertiesUtils.error(null, exception);
             return null;
         }
+    }
+    
+    private boolean createParentFolder(Path folder) {
+    	if(!folder.getParent().toFile().exists()) {
+    		createParentFolder(folder.getParent());
+    	}
+    	if(!folder.toFile().exists()) {
+    		folder.toFile().mkdir();
+    		return true;
+    	}else {
+    		return true;
+    	}
     }
 
     private void printSettings(){

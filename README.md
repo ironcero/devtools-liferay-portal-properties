@@ -113,13 +113,21 @@ You will see _WARNING_ log when you have some properties on your original proper
 You could review Liferay Test project in https://github.com/ironcero/devtools-liferay-portal-properties/tree/master/testProject/liferay-workspace
 
 ## Releases
+
 ### 1.0.0
 Base release
+
 ### 1.0.1
 * Add correct configuration default values
+
 ### 1.1.0
 * Junit and coverage included
+
 ### 1.1.1
 * Integration test included
+
 ### 2.0.0
 * Release on Maven Central (through oss.sonatype.org)
+
+### 2.1.0
+* Parsing folder capabilities added
